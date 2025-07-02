@@ -11,6 +11,7 @@
     - gradle
   - 他
     - IntelliJ
+    - jakarta
     - Lombok
     - GitHub Copilot
     - docker desktop
