@@ -18,7 +18,7 @@
 - 自動作成される資材はWSL上に作成される点に注意
 - WSLで下記を入力し作成
 ```shell script
-quarkus create app lps:lps_dev --extension=jooq --extension=jdbc-postgresql --extensions=hibernate-orm-panache --gradle
+quarkus create app lps_dev --gradle --extension="quarkus-jooq,quarkus-jdbc-postgresql,hibernate-orm-panache"
 ```
 
 ### 構築で苦労した点
