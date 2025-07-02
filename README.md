@@ -33,4 +33,4 @@ quarkus create app lps_dev --gradle --extension="quarkus-jooq,quarkus-jdbc-postg
 - WindowsのPowerShellでは「curl」というコマンドに別のツールが割り当てられていいる模様。標準の「curl」もあるため、そちらを使用したい場合は、エイリアスを削除すれば使用可能。
 - Shellにて、「java」や「gradle」のコマンドが動かない場合、対象のインストールと環境変数の設定が必要。
 - docker desktopのバージョンアップで、Hyper-Vのメモリ関連のエラーが発生。docker desktopの再インストールでエラー解消。既存コンテナが消えるため注意。
-- JAVA_HOMEの設定はubuntu上のため通常とは異なる。
+- IntelliJのJDKの設定がはずれてしまう。原因は不明。ubuntu上にJDKをダウンロードした場合のJAVA_HOMEの設定は通常とは異なる点に注意。
