@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'nu.studer.jooq' version '8.2'
     id 'io.quarkus'
 }
 
@@ -8,12 +9,25 @@ repositories {
     mavenLocal()
 }
 
+sourceSets {
+    jooqSupport {
+        java {
+            srcDir 'src/jooqSupport/java'
+        }
+    }
+}
+
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-hibernate-orm-panache'
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
     implementation 'io.quarkiverse.jooq:quarkus-jooq:2.1.0'
     implementation 'org.jooq:jooq'
+    jooqGenerator sourceSets.jooqSupport.output
+    jooqSupportImplementation "org.jooq:jooq-codegen:3.19.2"
+    jooqSupportImplementation "org.jooq:jooq-meta:3.19.2"
+    jooqGenerator 'org.postgresql:postgresql:42.7.3'
+    jooqGenerator files("$buildDir/classes/java/main")
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-hibernate-orm'
@@ -49,4 +63,45 @@ repositories {
 ext {
     quarkusPlatformVersion = "2.16.1.Final"
     quarkusPlatformGroupId = "io.quarkus"
+}
+
+jooq {
+    version = "3.19.2"
+    configurations {
+        main {
+            generationTool {
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5432/postgres'
+                    user = 'postgres'
+                    password = 'lpsdev'
+                }
+                generator {
+                    name = 'org.jooq.codegen.JavaGenerator'
+                    strategy {
+                        name = 'org.common.GeneratorStrategy'
+                    }
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                    }
+                    target {
+                        packageName = 'com.example.generated'
+                        directory = 'src/main/jooq'
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        pojos = true
+                        interfaces = true
+                        daos = true
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.named('generateJooq').configure {
+    dependsOn tasks.named('jooqSupportClasses')
 }
