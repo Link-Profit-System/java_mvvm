@@ -9,12 +9,15 @@
     - PostgreSQL
   - ビルドツール
     - gradle
+  - コンテナ
+    - docker desktop
+  - ライブラリ
+    - jooq（データベーススキーマに基づいてJavaコードを自動生成）
+    - jakarta（RESTful API）
   - 他
     - IntelliJ
-    - jakarta
     - Lombok
     - GitHub Copilot
-    - docker desktop
 - WSL上に資材を配置、SSHを使用してSourceTreeとGITを連結
 - 自動作成される資材はWSL上に作成される点に注意
 - WSLで下記を入力し作成
@@ -34,4 +37,4 @@ quarkus create app lps_dev --gradle --extension="quarkus-jooq,quarkus-jdbc-postg
 - Shellにて、「java」や「gradle」のコマンドが動かない場合、対象のインストールと環境変数の設定が必要。
 - docker desktopのバージョンアップで、Hyper-Vのメモリ関連のエラーが発生。docker desktopの再インストールでエラー解消。既存コンテナが消えるため注意。
 - IntelliJのJDKの設定がはずれてしまう。原因は不明。ubuntu上にJDKをダウンロードした場合のJAVA_HOMEの設定は通常とは異なる点に注意。
-- PostgresQLのテーブル/データをA5:...で作成したが、なぜか対象が異なる。psqlコマンドの「docker exec -it <コンテナ名> psql -U <ユーザー名>」を用いて直接SQLでテーブル/データを投入すると取得成功。
+- PostgresQLのテーブル/データをA5:...で作成したが、なぜか対象が異なる。psqlコマンドの「docker exec -it <コンテナ名> psql -U <ユーザー名>」を用いて直接SQLでテーブル/データを投入すると取得成功。コマンドで作成したテーブルはA5:...で確認可能。読み込み不正や遅延？
