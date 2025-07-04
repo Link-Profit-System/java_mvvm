@@ -8,6 +8,9 @@
     - Bootstrap
   - ライブラリ
     - axios
+  - 他
+    - Visual Studio Code
+    - GitHub Copilot
 - バックエンド
   - JAVA
     - フレームワーク：Quarkus
