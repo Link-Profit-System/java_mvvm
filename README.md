@@ -8,6 +8,7 @@
     - Bootstrap
   - ライブラリ
     - axios
+    - vue-sweetalert2
   - 他
     - Visual Studio Code
     - GitHub Copilot
