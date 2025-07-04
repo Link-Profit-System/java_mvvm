@@ -1,9 +1,9 @@
 package controller;
 
 import com.example.generated.tables.pojos.UsersVo;
-import dto.UserResponseDto;
+import dto.UserResponse;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
-import jakarta.persistence.Entity;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -21,25 +21,29 @@ public class UserController {
     private UserService userService;
 
     @GET
+    @Authenticated
     public Response getByQueryParam(@QueryParam("id") Integer id) {
         UsersVo user = userService.getUser(id);
-        UserResponseDto dto = new UserResponseDto(user.getId(), user.getName());
+        UserResponse dto = new UserResponse(user.getId(), user.getName());
         return Response.ok(dto).build();
     }
 
     @GET
     @Path("/{id}")
+    @Authenticated
     public Response getByPath(@PathParam("id") Integer id) {
         return Response.ok(userService.getUser(id)).build();
     }
 
     @GET
     @Path("/list")
+    @Authenticated
     public Response getList() {
         return Response.ok(userService.getUsers()).build();
     }
 
     @POST
+    @Authenticated
     public Response create(UsersVo user) {
         if (user == null || StringUtils.isEmpty(user.getName())) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -50,6 +54,7 @@ public class UserController {
 
     @PUT
     @Path("/{id}")
+    @Authenticated
     public Response update(@PathParam("id") Integer id, UsersVo user) {
         if (user == null || StringUtils.isEmpty(user.getName())) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -60,6 +65,7 @@ public class UserController {
 
     @DELETE
     @Path("/{id}")
+    @Authenticated
     public Response delete(@PathParam("id") Integer id) {
         userService.deleteUser(id);
         return Response.noContent().build();
