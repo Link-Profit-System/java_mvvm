@@ -19,6 +19,7 @@
     - Lombok
     - GitHub Copilot
     - Talend API Tester（Chrome拡張機能）
+    - 他プロジェクト作成のために色々インストール
 - WSL上に資材を配置、SSHを使用してSourceTreeとGITを連結
 - 自動作成される資材はWSL上に作成される点に注意
 - WSLで下記を入力し作成
