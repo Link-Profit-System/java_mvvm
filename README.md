@@ -1,8 +1,14 @@
 # memo
 
 ### 環境
-- Windows
-- サーバーサイド
+- Windows_WSL2
+- フロントエンド
+  - Vue.js
+  - UIフレームワーク
+    - Bootstrap
+  - ライブラリ
+    - axios
+- バックエンド
   - JAVA
     - フレームワーク：Quarkus
   - DB
