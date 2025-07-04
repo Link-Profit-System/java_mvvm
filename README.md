@@ -59,3 +59,5 @@ quarkus create app lps_dev --gradle --extension="quarkus-jooq,quarkus-jdbc-postg
   - IntelliJのJDKの設定がはずれてしまう。原因は不明。ubuntu上にJDKをダウンロードした場合のJAVA_HOMEの設定は通常とは異なる点に注意。
   - PostgresQLのテーブル/データをA5:...で作成したが、なぜか対象が異なる。psqlコマンドの「docker exec -it <コンテナ名> psql -U <ユーザー名>」を用いて直接SQLでテーブル/データを投入すると取得成功。コマンドで作成したテーブルはA5:...で確認可能。読み込み不正や遅延？再起動が必要？
   - プロジェクトの読み込みがリアルタイムで実施されない。再読み込みが必要？
+  - Talend Api Tester
+    - 認証はトークンのみでOK（JWT認証のみのため）。項目「Authorization」、設定値「Bearer eyJ0eXAiOi...」なので注意。
