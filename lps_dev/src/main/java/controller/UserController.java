@@ -45,7 +45,7 @@ public class UserController {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User name must not be empty").build();
         }
-        return Response.ok(userService.createUser(user)).build();
+        return Response.ok(userService.createUser(user)).status(Response.Status.CREATED).build();
     }
 
     @PUT
@@ -62,6 +62,6 @@ public class UserController {
     @Path("/{id}")
     public Response delete(@PathParam("id") Integer id) {
         userService.deleteUser(id);
-        return Response.ok().build();
+        return Response.noContent().build();
     }
 }
