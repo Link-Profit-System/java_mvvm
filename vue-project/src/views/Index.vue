@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Users</h1>
+    <div class="d-flex align-items-center mb-3">
+      <h1 class="me-3">Users</h1>
+      <router-link to="/create" class="btn btn-success">ユーザ作成</router-link>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -10,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in users" :key="user.id" class="align-middle">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>
@@ -25,6 +28,9 @@
 
 <script>
 import axios from 'axios'
+import { useAuthStore } from '../stores/auth'
+
+const auth = useAuthStore()
 
 export default {
   data() {

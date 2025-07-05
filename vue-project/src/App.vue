@@ -1,37 +1,30 @@
 <template>
-  <div id="app" class="container">
-    <nav class="navbar navbar-expand-sm bg-light">
-      <ul class="navbar-nav">
-        <li class="nav-user">
-          <router-link :to="{ name: 'Create' }" class="nav-link">Add User</router-link>
-        </li>
-        <li class="nav-user">
-          <router-link :to="{ name: 'Index' }" class="nav-link">All Users</router-link>
-        </li>
-      </ul>
-    </nav>
-    <transition name="fade">
-      <div class="gap">
-        <router-view></router-view>        
-      </div>
-    </transition>
+  <Navbar v-if="$route.name !== 'Login'" />
+  <div class="main-content">
+    <router-view />
   </div>
 </template>
 
-<script>
-
-export default {
-}
+<script setup lang="ts">
+import Navbar from './components/Navbar.vue'
+import { useRoute } from 'vue-router'
+const $route = useRoute()
 </script>
 
 <style>
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s
-    }
-    .fade-enter, .fade-leave-active {
-      opacity: 0
-    }
-    .gap {
-      margin-top: 50px;
-    }
+body, #app {
+  display: block;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+.gap {
+  margin-top: 50px;
+}
+.main-content {
+  margin-top: 2rem; /* ナビバーとの間に余白 */
+}
 </style>

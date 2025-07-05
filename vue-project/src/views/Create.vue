@@ -11,8 +11,9 @@
             <label>User Name:</label>
             <input type="text" class="form-control" v-model="user.name" />
           </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Add User" />
+          <div class="form-group mt-3">
+            <input type="submit" class="btn btn-primary me-2" value="Add User" />
+            <button type="button" class="btn btn-secondary" @click="cancel">キャンセル</button>
           </div>
         </form>
       </div>
@@ -22,6 +23,9 @@
 
 <script>
 import axios from 'axios'
+import { useAuthStore } from '../stores/auth'
+
+const auth = useAuthStore()
 
 export default {
   data() {
@@ -46,6 +50,9 @@ export default {
         .catch(error => {
           this.message = `status: ${error.response.status}, message: ${error.response.data}`;
         });
+    },
+    cancel() {
+      this.$router.push({ name: "Index" });
     }
   }
 };
