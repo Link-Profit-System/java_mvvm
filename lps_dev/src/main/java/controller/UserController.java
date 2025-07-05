@@ -56,9 +56,9 @@ public class UserController {
     @Path("/{id}")
     @Authenticated
     public Response update(@PathParam("id") Integer id, UsersVo user) {
-        if (user == null || StringUtils.isEmpty(user.getEmail())) {
+        if (user == null || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName())) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("User name must not be empty").build();
+                    .entity("User password or name must not be empty").build();
         }
         return Response.ok(userService.updateUser(id, user)).build();
     }

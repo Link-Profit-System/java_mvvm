@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import { useAuthStore } from './stores/auth'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'https://localhost:8443'
 
 const app = createApp(App)
 
