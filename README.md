@@ -12,6 +12,7 @@
   - 他
     - Visual Studio Code
     - GitHub Copilot
+    - Gemini Code Assist
 - バックエンド
   - JAVA
     - フレームワーク：Quarkus
@@ -31,6 +32,7 @@
     - IntelliJ
     - Lombok
     - GitHub Copilot
+    - Gemini Code Assist
     - Talend API Tester（Chrome拡張機能）
     - 他プロジェクト作成のために色々インストール
 - WSL上に資材を配置、SSHを使用してSourceTreeとGITを連結
