@@ -4,7 +4,13 @@
 package com.example.generated;
 
 
+import com.example.generated.tables.JGroups;
+import com.example.generated.tables.JGroupsRoles;
+import com.example.generated.tables.JPermissions;
+import com.example.generated.tables.JRoles;
+import com.example.generated.tables.JRolesPermissions;
 import com.example.generated.tables.JUsers;
+import com.example.generated.tables.JUsersGroups;
 
 
 /**
@@ -14,7 +20,37 @@ import com.example.generated.tables.JUsers;
 public class Tables {
 
     /**
+     * The table <code>public.groups</code>.
+     */
+    public static final JGroups GROUPS = JGroups.GROUPS;
+
+    /**
+     * The table <code>public.groups_roles</code>.
+     */
+    public static final JGroupsRoles GROUPS_ROLES = JGroupsRoles.GROUPS_ROLES;
+
+    /**
+     * The table <code>public.permissions</code>.
+     */
+    public static final JPermissions PERMISSIONS = JPermissions.PERMISSIONS;
+
+    /**
+     * The table <code>public.roles</code>.
+     */
+    public static final JRoles ROLES = JRoles.ROLES;
+
+    /**
+     * The table <code>public.roles_permissions</code>.
+     */
+    public static final JRolesPermissions ROLES_PERMISSIONS = JRolesPermissions.ROLES_PERMISSIONS;
+
+    /**
      * The table <code>public.users</code>.
      */
     public static final JUsers USERS = JUsers.USERS;
+
+    /**
+     * The table <code>public.users_groups</code>.
+     */
+    public static final JUsersGroups USERS_GROUPS = JUsersGroups.USERS_GROUPS;
 }

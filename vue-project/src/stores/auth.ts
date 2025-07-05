@@ -7,9 +7,9 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false)
   const token = ref('')
 
-  async function login(username: string, password: string) {
+  async function login(email: string, password: string) {
     try {
-      const res = await axios.post('/auth/login', { username, password })
+      const res = await axios.post('/auth/login', { email, password })
       user.value = res.data.user
       token.value = res.data.token
       isAuthenticated.value = true

@@ -6,21 +6,29 @@ package com.example.generated.tables;
 
 import com.example.generated.JPublic;
 import com.example.generated.Keys;
+import com.example.generated.tables.JGroups.GroupsPath;
+import com.example.generated.tables.JUsersGroups.UsersGroupsPath;
 import com.example.generated.tables.records.UsersRecord;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.Function4;
+import org.jooq.ForeignKey;
+import org.jooq.Function8;
 import org.jooq.Identity;
+import org.jooq.InverseForeignKey;
 import org.jooq.Name;
+import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
+import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row4;
+import org.jooq.Row8;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -62,6 +70,16 @@ public class JUsers extends TableImpl<UsersRecord> {
     public final TableField<UsersRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
+     * The column <code>public.users.email</code>.
+     */
+    public final TableField<UsersRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>public.users.password</code>.
+     */
+    public final TableField<UsersRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
      * The column <code>public.users.name</code>.
      */
     public final TableField<UsersRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).nullable(false), this, "");
@@ -72,9 +90,19 @@ public class JUsers extends TableImpl<UsersRecord> {
     public final TableField<UsersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
+     * The column <code>public.users.created_by</code>.
+     */
+    public final TableField<UsersRecord, Integer> CREATED_BY = createField(DSL.name("created_by"), SQLDataType.INTEGER, this, "");
+
+    /**
      * The column <code>public.users.updated_at</code>.
      */
     public final TableField<UsersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.users.updated_by</code>.
+     */
+    public final TableField<UsersRecord, Integer> UPDATED_BY = createField(DSL.name("updated_by"), SQLDataType.INTEGER, this, "");
 
     private JUsers(Name alias, Table<UsersRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -105,6 +133,37 @@ public class JUsers extends TableImpl<UsersRecord> {
         this(DSL.name("users"), null);
     }
 
+    public <O extends Record> JUsers(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+        super(path, childPath, parentPath, USERS);
+    }
+
+    /**
+     * A subtype implementing {@link Path} for simplified path-based joins.
+     */
+    public static class UsersPath extends JUsers implements Path<UsersRecord> {
+        public <O extends Record> UsersPath(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+            super(path, childPath, parentPath);
+        }
+        private UsersPath(Name alias, Table<UsersRecord> aliased) {
+            super(alias, aliased);
+        }
+
+        @Override
+        public UsersPath as(String alias) {
+            return new UsersPath(DSL.name(alias), this);
+        }
+
+        @Override
+        public UsersPath as(Name alias) {
+            return new UsersPath(alias, this);
+        }
+
+        @Override
+        public UsersPath as(Table<?> alias) {
+            return new UsersPath(alias.getQualifiedName(), this);
+        }
+    }
+
     @Override
     public Schema getSchema() {
         return aliased() ? null : JPublic.PUBLIC;
@@ -118,6 +177,32 @@ public class JUsers extends TableImpl<UsersRecord> {
     @Override
     public UniqueKey<UsersRecord> getPrimaryKey() {
         return Keys.USERS_PKEY;
+    }
+
+    @Override
+    public List<UniqueKey<UsersRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.USERS_EMAIL_KEY);
+    }
+
+    private transient UsersGroupsPath _usersGroups;
+
+    /**
+     * Get the implicit to-many join path to the
+     * <code>public.users_groups</code> table
+     */
+    public UsersGroupsPath usersGroups() {
+        if (_usersGroups == null)
+            _usersGroups = new UsersGroupsPath(this, null, Keys.USERS_GROUPS__FK_USER.getInverseKey());
+
+        return _usersGroups;
+    }
+
+    /**
+     * Get the implicit many-to-many join path to the <code>public.groups</code>
+     * table
+     */
+    public GroupsPath groups() {
+        return usersGroups().groups();
     }
 
     @Override
@@ -244,18 +329,18 @@ public class JUsers extends TableImpl<UsersRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row8<Integer, String, String, String, LocalDateTime, Integer, LocalDateTime, Integer> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super Integer, ? super String, ? super LocalDateTime, ? super LocalDateTime, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super Integer, ? super String, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super LocalDateTime, ? super Integer, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -263,7 +348,7 @@ public class JUsers extends TableImpl<UsersRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super String, ? super LocalDateTime, ? super LocalDateTime, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Integer, ? super String, ? super String, ? super String, ? super LocalDateTime, ? super Integer, ? super LocalDateTime, ? super Integer, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

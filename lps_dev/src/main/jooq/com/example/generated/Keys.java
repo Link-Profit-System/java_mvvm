@@ -4,9 +4,22 @@
 package com.example.generated;
 
 
+import com.example.generated.tables.JGroups;
+import com.example.generated.tables.JGroupsRoles;
+import com.example.generated.tables.JPermissions;
+import com.example.generated.tables.JRoles;
+import com.example.generated.tables.JRolesPermissions;
 import com.example.generated.tables.JUsers;
+import com.example.generated.tables.JUsersGroups;
+import com.example.generated.tables.records.GroupsRecord;
+import com.example.generated.tables.records.GroupsRolesRecord;
+import com.example.generated.tables.records.PermissionsRecord;
+import com.example.generated.tables.records.RolesPermissionsRecord;
+import com.example.generated.tables.records.RolesRecord;
+import com.example.generated.tables.records.UsersGroupsRecord;
 import com.example.generated.tables.records.UsersRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,5 +37,29 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<GroupsRecord> GROUPS_GROUP_NAME_KEY = Internal.createUniqueKey(JGroups.GROUPS, DSL.name("groups_group_name_key"), new TableField[] { JGroups.GROUPS.GROUP_NAME }, true);
+    public static final UniqueKey<GroupsRecord> GROUPS_PKEY = Internal.createUniqueKey(JGroups.GROUPS, DSL.name("groups_pkey"), new TableField[] { JGroups.GROUPS.ID }, true);
+    public static final UniqueKey<GroupsRolesRecord> GROUPS_ROLES_PKEY = Internal.createUniqueKey(JGroupsRoles.GROUPS_ROLES, DSL.name("groups_roles_pkey"), new TableField[] { JGroupsRoles.GROUPS_ROLES.ID }, true);
+    public static final UniqueKey<GroupsRolesRecord> UNIQUE_GROUP_ROLE = Internal.createUniqueKey(JGroupsRoles.GROUPS_ROLES, DSL.name("unique_group_role"), new TableField[] { JGroupsRoles.GROUPS_ROLES.GROUP_ID, JGroupsRoles.GROUPS_ROLES.ROLE_ID }, true);
+    public static final UniqueKey<PermissionsRecord> PERMISSIONS_PERMISSION_NAME_KEY = Internal.createUniqueKey(JPermissions.PERMISSIONS, DSL.name("permissions_permission_name_key"), new TableField[] { JPermissions.PERMISSIONS.PERMISSION_NAME }, true);
+    public static final UniqueKey<PermissionsRecord> PERMISSIONS_PKEY = Internal.createUniqueKey(JPermissions.PERMISSIONS, DSL.name("permissions_pkey"), new TableField[] { JPermissions.PERMISSIONS.ID }, true);
+    public static final UniqueKey<RolesRecord> ROLES_PKEY = Internal.createUniqueKey(JRoles.ROLES, DSL.name("roles_pkey"), new TableField[] { JRoles.ROLES.ID }, true);
+    public static final UniqueKey<RolesRecord> ROLES_ROLE_NAME_KEY = Internal.createUniqueKey(JRoles.ROLES, DSL.name("roles_role_name_key"), new TableField[] { JRoles.ROLES.ROLE_NAME }, true);
+    public static final UniqueKey<RolesPermissionsRecord> ROLES_PERMISSIONS_PKEY = Internal.createUniqueKey(JRolesPermissions.ROLES_PERMISSIONS, DSL.name("roles_permissions_pkey"), new TableField[] { JRolesPermissions.ROLES_PERMISSIONS.ID }, true);
+    public static final UniqueKey<RolesPermissionsRecord> UNIQUE_ROLE_PERMISSION = Internal.createUniqueKey(JRolesPermissions.ROLES_PERMISSIONS, DSL.name("unique_role_permission"), new TableField[] { JRolesPermissions.ROLES_PERMISSIONS.ROLE_ID, JRolesPermissions.ROLES_PERMISSIONS.PERMISSION_ID }, true);
+    public static final UniqueKey<UsersRecord> USERS_EMAIL_KEY = Internal.createUniqueKey(JUsers.USERS, DSL.name("users_email_key"), new TableField[] { JUsers.USERS.EMAIL }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(JUsers.USERS, DSL.name("users_pkey"), new TableField[] { JUsers.USERS.ID }, true);
+    public static final UniqueKey<UsersGroupsRecord> UNIQUE_USER_GROUP = Internal.createUniqueKey(JUsersGroups.USERS_GROUPS, DSL.name("unique_user_group"), new TableField[] { JUsersGroups.USERS_GROUPS.USER_ID, JUsersGroups.USERS_GROUPS.GROUP_ID }, true);
+    public static final UniqueKey<UsersGroupsRecord> USERS_GROUPS_PKEY = Internal.createUniqueKey(JUsersGroups.USERS_GROUPS, DSL.name("users_groups_pkey"), new TableField[] { JUsersGroups.USERS_GROUPS.ID }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<GroupsRolesRecord, GroupsRecord> GROUPS_ROLES__FK_GROUP = Internal.createForeignKey(JGroupsRoles.GROUPS_ROLES, DSL.name("fk_group"), new TableField[] { JGroupsRoles.GROUPS_ROLES.GROUP_ID }, Keys.GROUPS_PKEY, new TableField[] { JGroups.GROUPS.ID }, true);
+    public static final ForeignKey<GroupsRolesRecord, RolesRecord> GROUPS_ROLES__FK_ROLE = Internal.createForeignKey(JGroupsRoles.GROUPS_ROLES, DSL.name("fk_role"), new TableField[] { JGroupsRoles.GROUPS_ROLES.ROLE_ID }, Keys.ROLES_PKEY, new TableField[] { JRoles.ROLES.ID }, true);
+    public static final ForeignKey<RolesPermissionsRecord, PermissionsRecord> ROLES_PERMISSIONS__FK_PERMISSION = Internal.createForeignKey(JRolesPermissions.ROLES_PERMISSIONS, DSL.name("fk_permission"), new TableField[] { JRolesPermissions.ROLES_PERMISSIONS.PERMISSION_ID }, Keys.PERMISSIONS_PKEY, new TableField[] { JPermissions.PERMISSIONS.ID }, true);
+    public static final ForeignKey<RolesPermissionsRecord, RolesRecord> ROLES_PERMISSIONS__FK_ROLE = Internal.createForeignKey(JRolesPermissions.ROLES_PERMISSIONS, DSL.name("fk_role"), new TableField[] { JRolesPermissions.ROLES_PERMISSIONS.ROLE_ID }, Keys.ROLES_PKEY, new TableField[] { JRoles.ROLES.ID }, true);
+    public static final ForeignKey<UsersGroupsRecord, GroupsRecord> USERS_GROUPS__FK_GROUP = Internal.createForeignKey(JUsersGroups.USERS_GROUPS, DSL.name("fk_group"), new TableField[] { JUsersGroups.USERS_GROUPS.GROUP_ID }, Keys.GROUPS_PKEY, new TableField[] { JGroups.GROUPS.ID }, true);
+    public static final ForeignKey<UsersGroupsRecord, UsersRecord> USERS_GROUPS__FK_USER = Internal.createForeignKey(JUsersGroups.USERS_GROUPS, DSL.name("fk_user"), new TableField[] { JUsersGroups.USERS_GROUPS.USER_ID }, Keys.USERS_PKEY, new TableField[] { JUsers.USERS.ID }, true);
 }

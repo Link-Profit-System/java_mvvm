@@ -21,6 +21,13 @@ public class UsersRepository {
                 .fetchOneInto(UsersVo.class);
     }
 
+    public UsersVo findUserByEmailAndPassword(String email, String password) {
+        return dsl.selectFrom(USERS)
+                .where(USERS.EMAIL.equal(email)
+                        .and(USERS.PASSWORD.equal(password)))
+                .fetchOneInto(UsersVo.class);
+    }
+
     public List<UsersVo> findAllUsers() {
         return dsl.selectFrom(USERS)
                 .fetchInto(UsersVo.class);
@@ -28,6 +35,8 @@ public class UsersRepository {
 
     public UsersVo createUser(UsersVo user) {
         return dsl.insertInto(USERS)
+                .set(USERS.EMAIL, user.getEmail())
+                .set(USERS.PASSWORD, user.getPassword())
                 .set(USERS.NAME, user.getName())
                 .returning(USERS.ID, USERS.NAME)
                 .fetchOne()
@@ -35,6 +44,7 @@ public class UsersRepository {
     }
     public UsersVo updateUserById(Integer id, UsersVo user) {
         return dsl.update(USERS)
+                .set(USERS.PASSWORD, user.getPassword())
                 .set(USERS.NAME, user.getName())
                 .where(USERS.ID.equal(id))
                 .returning(USERS.ID, USERS.NAME)

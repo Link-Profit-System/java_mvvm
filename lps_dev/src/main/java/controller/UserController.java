@@ -24,7 +24,7 @@ public class UserController {
     @Authenticated
     public Response getByQueryParam(@QueryParam("id") Integer id) {
         UsersVo user = userService.getUser(id);
-        UserResponse dto = new UserResponse(user.getId(), user.getName());
+        UserResponse dto = new UserResponse(user.getId(), user.getEmail());
         return Response.ok(dto).build();
     }
 
@@ -45,7 +45,7 @@ public class UserController {
     @POST
     @Authenticated
     public Response create(UsersVo user) {
-        if (user == null || StringUtils.isEmpty(user.getName())) {
+        if (user == null || StringUtils.isEmpty(user.getEmail())) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User name must not be empty").build();
         }
@@ -56,7 +56,7 @@ public class UserController {
     @Path("/{id}")
     @Authenticated
     public Response update(@PathParam("id") Integer id, UsersVo user) {
-        if (user == null || StringUtils.isEmpty(user.getName())) {
+        if (user == null || StringUtils.isEmpty(user.getEmail())) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User name must not be empty").build();
         }

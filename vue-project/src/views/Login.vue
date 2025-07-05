@@ -3,8 +3,8 @@
     <h2>Login</h2>
     <form @submit.prevent="onLogin">
       <div class="mb-3">
-        <label>Username</label>
-        <input v-model="username" class="form-control" />
+        <label>Email</label>
+        <input v-model="email" class="form-control" />
       </div>
       <div class="mb-3">
         <label>Password</label>
@@ -21,14 +21,14 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const error = ref('')
 const router = useRouter()
 const auth = useAuthStore()
 
 async function onLogin() {
-  const ok = await auth.login(username.value, password.value)
+  const ok = await auth.login(email.value, password.value)
   if (ok) {
     router.push({ name: 'Index' })
   } else {

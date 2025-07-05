@@ -25,6 +25,26 @@ public interface IUsers extends Serializable {
     public Integer getId();
 
     /**
+     * Setter for <code>public.users.email</code>.
+     */
+    public void setEmail(String value);
+
+    /**
+     * Getter for <code>public.users.email</code>.
+     */
+    public String getEmail();
+
+    /**
+     * Setter for <code>public.users.password</code>.
+     */
+    public void setPassword(String value);
+
+    /**
+     * Getter for <code>public.users.password</code>.
+     */
+    public String getPassword();
+
+    /**
      * Setter for <code>public.users.name</code>.
      */
     public void setName(String value);
@@ -45,6 +65,16 @@ public interface IUsers extends Serializable {
     public LocalDateTime getCreatedAt();
 
     /**
+     * Setter for <code>public.users.created_by</code>.
+     */
+    public void setCreatedBy(Integer value);
+
+    /**
+     * Getter for <code>public.users.created_by</code>.
+     */
+    public Integer getCreatedBy();
+
+    /**
      * Setter for <code>public.users.updated_at</code>.
      */
     public void setUpdatedAt(LocalDateTime value);
@@ -53,6 +83,16 @@ public interface IUsers extends Serializable {
      * Getter for <code>public.users.updated_at</code>.
      */
     public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>public.users.updated_by</code>.
+     */
+    public void setUpdatedBy(Integer value);
+
+    /**
+     * Getter for <code>public.users.updated_by</code>.
+     */
+    public Integer getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO

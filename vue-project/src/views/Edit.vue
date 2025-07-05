@@ -8,7 +8,11 @@
         <form v-on:submit.prevent="updateUser">
           <div v-show="message" class="alert alert-danger">{{message}}</div>
           <div class="form-group">
-            <label>User Name:</label>
+            <label>Password:</label>
+            <input type="text" class="form-control" v-model="user.password" />
+          </div>
+          <div class="form-group">
+            <label>Name:</label>
             <input type="text" class="form-control" v-model="user.name" />
           </div>
           <div class="form-group mt-3">

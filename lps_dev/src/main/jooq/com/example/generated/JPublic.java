@@ -4,7 +4,13 @@
 package com.example.generated;
 
 
+import com.example.generated.tables.JGroups;
+import com.example.generated.tables.JGroupsRoles;
+import com.example.generated.tables.JPermissions;
+import com.example.generated.tables.JRoles;
+import com.example.generated.tables.JRolesPermissions;
 import com.example.generated.tables.JUsers;
+import com.example.generated.tables.JUsersGroups;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,9 +34,39 @@ public class JPublic extends SchemaImpl {
     public static final JPublic PUBLIC = new JPublic();
 
     /**
+     * The table <code>public.groups</code>.
+     */
+    public final JGroups GROUPS = JGroups.GROUPS;
+
+    /**
+     * The table <code>public.groups_roles</code>.
+     */
+    public final JGroupsRoles GROUPS_ROLES = JGroupsRoles.GROUPS_ROLES;
+
+    /**
+     * The table <code>public.permissions</code>.
+     */
+    public final JPermissions PERMISSIONS = JPermissions.PERMISSIONS;
+
+    /**
+     * The table <code>public.roles</code>.
+     */
+    public final JRoles ROLES = JRoles.ROLES;
+
+    /**
+     * The table <code>public.roles_permissions</code>.
+     */
+    public final JRolesPermissions ROLES_PERMISSIONS = JRolesPermissions.ROLES_PERMISSIONS;
+
+    /**
      * The table <code>public.users</code>.
      */
     public final JUsers USERS = JUsers.USERS;
+
+    /**
+     * The table <code>public.users_groups</code>.
+     */
+    public final JUsersGroups USERS_GROUPS = JUsersGroups.USERS_GROUPS;
 
     /**
      * No further instances allowed
@@ -48,7 +84,13 @@ public class JPublic extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            JUsers.USERS
+            JGroups.GROUPS,
+            JGroupsRoles.GROUPS_ROLES,
+            JPermissions.PERMISSIONS,
+            JRoles.ROLES,
+            JRolesPermissions.ROLES_PERMISSIONS,
+            JUsers.USERS,
+            JUsersGroups.USERS_GROUPS
         );
     }
 }

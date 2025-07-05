@@ -71,6 +71,50 @@ public class UsersDao extends DAOImpl<UsersRecord, UsersVo, Integer> {
     }
 
     /**
+     * Fetch records that have <code>email BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<UsersVo> fetchRangeOfJEmail(String lowerInclusive, String upperInclusive) {
+        return fetchRange(JUsers.USERS.EMAIL, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>email IN (values)</code>
+     */
+    public List<UsersVo> fetchByJEmail(String... values) {
+        return fetch(JUsers.USERS.EMAIL, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>email = value</code>
+     */
+    public UsersVo fetchOneByJEmail(String value) {
+        return fetchOne(JUsers.USERS.EMAIL, value);
+    }
+
+    /**
+     * Fetch a unique record that has <code>email = value</code>
+     */
+    public Optional<UsersVo> fetchOptionalByJEmail(String value) {
+        return fetchOptional(JUsers.USERS.EMAIL, value);
+    }
+
+    /**
+     * Fetch records that have <code>password BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<UsersVo> fetchRangeOfJPassword(String lowerInclusive, String upperInclusive) {
+        return fetchRange(JUsers.USERS.PASSWORD, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>password IN (values)</code>
+     */
+    public List<UsersVo> fetchByJPassword(String... values) {
+        return fetch(JUsers.USERS.PASSWORD, values);
+    }
+
+    /**
      * Fetch records that have <code>name BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
@@ -101,6 +145,21 @@ public class UsersDao extends DAOImpl<UsersRecord, UsersVo, Integer> {
     }
 
     /**
+     * Fetch records that have <code>created_by BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<UsersVo> fetchRangeOfJCreatedBy(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(JUsers.USERS.CREATED_BY, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>created_by IN (values)</code>
+     */
+    public List<UsersVo> fetchByJCreatedBy(Integer... values) {
+        return fetch(JUsers.USERS.CREATED_BY, values);
+    }
+
+    /**
      * Fetch records that have <code>updated_at BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
@@ -113,5 +172,20 @@ public class UsersDao extends DAOImpl<UsersRecord, UsersVo, Integer> {
      */
     public List<UsersVo> fetchByJUpdatedAt(LocalDateTime... values) {
         return fetch(JUsers.USERS.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>updated_by BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<UsersVo> fetchRangeOfJUpdatedBy(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(JUsers.USERS.UPDATED_BY, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>updated_by IN (values)</code>
+     */
+    public List<UsersVo> fetchByJUpdatedBy(Integer... values) {
+        return fetch(JUsers.USERS.UPDATED_BY, values);
     }
 }
