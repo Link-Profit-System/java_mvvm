@@ -12,6 +12,7 @@ import service.AuthService;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthController {
+
     @Inject
     AuthService authService;
 

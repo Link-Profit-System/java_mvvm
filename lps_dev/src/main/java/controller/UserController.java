@@ -3,6 +3,7 @@ package controller;
 import com.example.generated.tables.pojos.UsersVo;
 import dto.UserResponse;
 import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -21,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @GET
-    @Authenticated
+    @RolesAllowed("user-read")
     public Response getByQueryParam(@QueryParam("id") Integer id) {
         UsersVo user = userService.getUser(id);
         UserResponse dto = new UserResponse(user.getId(), user.getEmail());
@@ -30,20 +31,20 @@ public class UserController {
 
     @GET
     @Path("/{id}")
-    @Authenticated
+    @RolesAllowed("user-read")
     public Response getByPath(@PathParam("id") Integer id) {
         return Response.ok(userService.getUser(id)).build();
     }
 
     @GET
     @Path("/list")
-    @Authenticated
+    @RolesAllowed("user-read")
     public Response getList() {
         return Response.ok(userService.getUsers()).build();
     }
 
     @POST
-    @Authenticated
+    @RolesAllowed("user-write")
     public Response create(UsersVo user) {
         if (user == null || StringUtils.isEmpty(user.getEmail())) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -54,7 +55,7 @@ public class UserController {
 
     @PUT
     @Path("/{id}")
-    @Authenticated
+    @RolesAllowed("user-write")
     public Response update(@PathParam("id") Integer id, UsersVo user) {
         if (user == null || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName())) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -65,7 +66,7 @@ public class UserController {
 
     @DELETE
     @Path("/{id}")
-    @Authenticated
+    @RolesAllowed("user-write")
     public Response delete(@PathParam("id") Integer id) {
         userService.deleteUser(id);
         return Response.noContent().build();
