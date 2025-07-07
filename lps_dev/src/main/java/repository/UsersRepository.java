@@ -63,15 +63,4 @@ public class UsersRepository {
                 .where(USERS.ID.equal(id))
                 .execute();
     }
-
-    public List<PermissionsVo> findPermissionsByUserEmail(String email) {
-        return dsl.selectDistinct(PERMISSIONS.PERMISSION_NAME)
-                .from(USERS)
-                .join(USERS_GROUPS).on(USERS_GROUPS.USER_ID.equal(USERS.ID))
-                .join(GROUPS_ROLES).on(GROUPS_ROLES.GROUP_ID.equal(USERS_GROUPS.GROUP_ID))
-                .join(ROLES_PERMISSIONS).on(ROLES_PERMISSIONS.ROLE_ID.equal(GROUPS_ROLES.ROLE_ID))
-                .join(PERMISSIONS).on(PERMISSIONS.ID.equal(ROLES_PERMISSIONS.PERMISSION_ID))
-                .where(USERS.EMAIL.equal(email))
-                .fetchInto(PermissionsVo.class);
-    }
 }
