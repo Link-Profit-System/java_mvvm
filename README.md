@@ -67,3 +67,6 @@ quarkus create app lps_dev --gradle --extension="quarkus-jooq,quarkus-jdbc-postg
   - プロジェクトの読み込みがリアルタイムで実施されない。再読み込みが必要？
   - Talend Api Tester
     - 認証はトークンのみでOK（JWT認証のみのため）。項目「Authorization」、設定値「Bearer eyJ0eXAiOi...」なので注意。
+  - 認可機能
+    - @CacheResultを使用する場合、そのメソッドは「public」のみが可能。
+    - QuarkusはDBアクセスが非ブロッキングを推奨している。認可機能の拡張の場合に、非ブロッキングメソッドであるとして「Uni<>」を使用する。このあたりの処理構成が少々複雑。エンドポイントからの処理では気にしなくてもよさそう。
